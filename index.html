@@ -255,7 +255,8 @@
         </div>
         
         <div class="resources-container" id="resourcesContainer">
-            </div>
+            <!-- Resources will be dynamically inserted here -->
+        </div>
         
         <div class="no-results" id="noResults">
             <i class="fas fa-search"></i>
@@ -412,4 +413,124 @@
                 description: "A game-theoretic approach to explain the output of any machine learning model, critical for transparency in AI design.",
                 category: "research",
                 type: "Research Portal",
-                url: "
+                url: "https://shap.readthedocs.io/en/latest/",
+                featured: true
+            }
+        ];
+
+        // DOM elements
+        const resourcesContainer = document.getElementById('resourcesContainer');
+        const searchInput = document.getElementById('searchInput');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const noResults = document.getElementById('noResults');
+        const totalCount = document.getElementById('totalCount');
+        const filteredCount = document.getElementById('filteredCount');
+
+        // Initialize the page
+        function init() {
+            renderResources(resources);
+            totalCount.textContent = resources.length;
+            filteredCount.textContent = resources.length;
+            
+            // Add event listeners
+            searchInput.addEventListener('input', filterResources);
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', handleCategoryFilter);
+            });
+        }
+
+        // Render resources to the page
+        function renderResources(resourceArray) {
+            resourcesContainer.innerHTML = '';
+            
+            if (resourceArray.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            resourceArray.forEach(resource => {
+                const card = document.createElement('div');
+                card.className = 'resource-card';
+                
+                // Determine category class
+                let categoryClass = '';
+                switch(resource.category) {
+                    case 'dashboard': categoryClass = 'dashboard-cat'; break;
+                    case 'pipeline': categoryClass = 'pipeline-cat'; break;
+                    case 'product': categoryClass = 'product-cat'; break;
+                    case 'research': categoryClass = 'research-cat'; break;
+                }
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="resource-category ${categoryClass}">${getCategoryName(resource.category)}</span>
+                        <h3>${resource.title}</h3>
+                        <p>${resource.description}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="${resource.url}" target="_blank" class="visit-btn">Visit Resource</a>
+                        <span class="resource-type">${resource.type}</span>
+                    </div>
+                `;
+                
+                resourcesContainer.appendChild(card);
+            });
+            
+            filteredCount.textContent = resourceArray.length;
+        }
+
+        // Get display name for category
+        function getCategoryName(category) {
+            switch(category) {
+                case 'dashboard': return 'Dashboards';
+                case 'pipeline': return 'Job Pipelines';
+                case 'product': return 'AI Products';
+                case 'research': return 'Research';
+                default: return category;
+            }
+        }
+
+        // Handle category filtering
+        function handleCategoryFilter(e) {
+            const category = e.target.dataset.category;
+            
+            // Update active button
+            categoryButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            e.target.classList.add('active');
+            
+            filterResources();
+        }
+
+        // Filter resources based on search and category
+        function filterResources() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.category-btn.active').dataset.category;
+            
+            const filteredResources = resources.filter(resource => {
+                // Check category filter
+                if (activeCategory !== 'all' && resource.category !== activeCategory) {
+                    return false;
+                }
+                
+                // Check search filter
+                if (searchTerm.trim() === '') {
+                    return true;
+                }
+                
+                // Search in title, description, type, and category
+                const searchIn = `${resource.title} ${resource.description} ${resource.type} ${getCategoryName(resource.category)}`.toLowerCase();
+                return searchIn.includes(searchTerm);
+            });
+            
+            renderResources(filteredResources);
+        }
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
