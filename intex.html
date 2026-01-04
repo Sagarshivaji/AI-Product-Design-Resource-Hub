@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Product Design Resources Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 25px;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .category-btn {
+            padding: 12px 24px;
+            background-color: white;
+            border: 2px solid #e0e7ff;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .resources-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .resource-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            padding: 25px 25px 15px;
+        }
+        
+        .resource-category {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .dashboard-cat {
+            background-color: #e0f7fa;
+            color: #006064;
+        }
+        
+        .pipeline-cat {
+            background-color: #f3e5f5;
+            color: #4a148c;
+        }
+        
+        .product-cat {
+            background-color: #e8f5e9;
+            color: #1b5e20;
+        }
+        
+        .research-cat {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+        
+        .resource-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .resource-card p {
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .card-footer {
+            padding: 20px 25px;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .visit-btn {
+            padding: 10px 20px;
+            background-color: #667eea;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        
+        .visit-btn:hover {
+            background-color: #5a6fd8;
+        }
+        
+        .resource-type {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+            display: none;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        
+        .counter {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .counter-item {
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .counter-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .resources-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .categories {
+                gap: 10px;
+            }
+            
+            .category-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Product Design Resources Hub</h1>
+            <p class="subtitle">A curated collection of AI product design resources covering dashboards, job pipelines, AI products, and research materials for designers and developers.</p>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for resources by keyword, category, or type...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </header>
+        
+        <div class="categories">
+            <button class="category-btn active" data-category="all">All Resources</button>
+            <button class="category-btn" data-category="dashboard">Dashboards</button>
+            <button class="category-btn" data-category="pipeline">Job Pipelines</button>
+            <button class="category-btn" data-category="product">AI Products</button>
+            <button class="category-btn" data-category="research">Research</button>
+        </div>
+        
+        <div class="counter">
+            <div class="counter-item">
+                <div class="counter-number" id="totalCount">16</div>
+                <div>Total Resources</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="filteredCount">16</div>
+                <div>Currently Showing</div>
+            </div>
+        </div>
+        
+        <div class="resources-container" id="resourcesContainer">
+            <!-- Resources will be dynamically added here -->
+        </div>
+        
+        <div class="no-results" id="noResults">
+            <i class="fas fa-search"></i>
+            <h3>No resources found</h3>
+            <p>Try adjusting your search or filter to find what you're looking for.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>AI Product Design Resources Hub | Curated for designers and developers</p>
+        <p>Resources are regularly updated | Last updated: June 2023</p>
+    </footer>
+
+    <script>
+        // AI Product Design Resources Data
+        const resources = [
+            {
+                id: 1,
+                title: "AI Dashboard Design Patterns",
+                description: "A comprehensive collection of dashboard UI patterns specifically for AI/ML products with examples and best practices.",
+                category: "dashboard",
+                type: "Design Patterns",
+                url: "https://www.aidashboarddesign.com/patterns",
+                featured: true
+            },
+            {
+                id: 2,
+                title: "AI Job Pipeline Visualization Toolkit",
+                description: "Open-source toolkit for visualizing AI training pipelines and job workflows with interactive components.",
+                category: "pipeline",
+                type: "Toolkit",
+                url: "https://github.com/aidesign/pipeline-visualization",
+                featured: true
+            },
+            {
+                id: 3,
+                title: "AI Product Design Guidelines",
+                description: "Google's comprehensive guide to designing AI-powered products with ethical considerations and UX patterns.",
+                category: "product",
+                type: "Guidelines",
+                url: "https://designguidelines.ai",
+                featured: true
+            },
+            {
+                id: 4,
+                title: "Human-Centered AI Research Papers",
+                description: "Curated collection of research papers on human-centered AI design from top conferences and journals.",
+                category: "research",
+                type: "Research Papers",
+                url: "https://hcai-research.design/papers",
+                featured: false
+            },
+            {
+                id: 5,
+                title: "AI Model Performance Dashboards",
+                description: "Templates and examples for dashboards that visualize AI model performance metrics and comparisons.",
+                category: "dashboard",
+                type: "Templates",
+                url: "https://www.modeldashboards.io/templates",
+                featured: false
+            },
+            {
+                id: 6,
+                title: "ML Pipeline Monitoring Systems",
+                description: "Analysis of monitoring systems for machine learning pipelines in production environments.",
+                category: "pipeline",
+                type: "Case Studies",
+                url: "https://mlops.design/case-studies",
+                featured: true
+            },
+            {
+                id: 7,
+                title: "Conversational AI Design Patterns",
+                description: "Design patterns and principles for creating effective conversational AI interfaces and chatbots.",
+                category: "product",
+                type: "Design Patterns",
+                url: "https://conversationalai.design/patterns",
+                featured: false
+            },
+            {
+                id: 8,
+                title: "AI Ethics & Fairness Research",
+                description: "Research hub focusing on ethical AI design, bias detection, and fairness in machine learning systems.",
+                category: "research",
+                type: "Research Hub",
+                url: "https://aiethicsresearch.design",
+                featured: true
+            },
+            {
+                id: 9,
+                title: "Real-time AI Data Dashboards",
+                description: "Examples of real-time dashboards for monitoring AI systems and data streams with live visualizations.",
+                category: "dashboard",
+                type: "Examples",
+                url: "https://realtime-ai-dash.design/examples",
+                featured: false
+            },
+            {
+                id: 10,
+                title: "Automated ML Pipeline Design",
+                description: "Guide to designing automated machine learning pipelines with focus on user experience and control.",
+                category: "pipeline",
+                type: "Guide",
+                url: "https://automl.design/guide",
+                featured: false
+            },
+            {
+                id: 11,
+                title: "AI-Powered Design Tools",
+                description: "Review of AI-powered design tools that assist with prototyping, layout generation, and UX analysis.",
+                category: "product",
+                type: "Tool Review",
+                url: "https://aitools.design/review",
+                featured: true
+            },
+            {
+                id: 12,
+                title: "AI Design Thinking Methodology",
+                description: "Research on adapting design thinking methodologies for AI product development cycles.",
+                category: "research",
+                type: "Methodology",
+                url: "https://designthinking.ai/methodology",
+                featured: false
+            },
+            {
+                id: 13,
+                title: "Multi-model AI Dashboards",
+                description: "Framework for designing dashboards that compare and contrast multiple AI models simultaneously.",
+                category: "dashboard",
+                type: "Framework",
+                url: "https://multimodel-dash.design/framework",
+                featured: false
+            },
+            {
+                id: 14,
+                title: "CI/CD for ML Pipelines",
+                description: "Best practices for implementing continuous integration and deployment for machine learning pipelines.",
+                category: "pipeline",
+                type: "Best Practices",
+                url: "https://cicd-ml.design/best-practices",
+                featured: true
+            },
+            {
+                id: 15,
+                title: "AI Product Management Resources",
+                description: "Resources for product managers working on AI products, including roadmaps and stakeholder management.",
+                category: "product",
+                type: "PM Resources",
+                url: "https://aiproductmanagement.design/resources",
+                featured: false
+            },
+            {
+                id: 16,
+                title: "AI Explainability Research",
+                description: "Latest research on making AI decisions explainable and interpretable for end-users and stakeholders.",
+                category: "research",
+                type: "Research Portal",
+                url: "https://explainable-ai.design/research",
+                featured: true
+            }
+        ];
+
+        // DOM elements
+        const resourcesContainer = document.getElementById('resourcesContainer');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+        const totalCount = document.getElementById('totalCount');
+        const filteredCount = document.getElementById('filteredCount');
+        
+        // Initialize counts
+        totalCount.textContent = resources.length;
+        
+        // Display all resources on page load
+        function displayResources(resourceArray) {
+            resourcesContainer.innerHTML = '';
+            
+            if (resourceArray.length === 0) {
+                noResults.style.display = 'block';
+                filteredCount.textContent = '0';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            filteredCount.textContent = resourceArray.length;
+            
+            resourceArray.forEach(resource => {
+                const resourceCard = document.createElement('div');
+                resourceCard.className = 'resource-card';
+                
+                // Determine category class
+                let categoryClass = '';
+                switch(resource.category) {
+                    case 'dashboard': categoryClass = 'dashboard-cat'; break;
+                    case 'pipeline': categoryClass = 'pipeline-cat'; break;
+                    case 'product': categoryClass = 'product-cat'; break;
+                    case 'research': categoryClass = 'research-cat'; break;
+                }
+                
+                // Determine category label
+                let categoryLabel = '';
+                switch(resource.category) {
+                    case 'dashboard': categoryLabel = 'Dashboard'; break;
+                    case 'pipeline': categoryLabel = 'Job Pipeline'; break;
+                    case 'product': categoryLabel = 'AI Product'; break;
+                    case 'research': categoryLabel = 'Research'; break;
+                }
+                
+                resourceCard.innerHTML = `
+                    <div class="card-header">
+                        <span class="resource-category ${categoryClass}">${categoryLabel}</span>
+                        <h3>${resource.title}</h3>
+                        <p>${resource.description}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="resource-type">${resource.type}</span>
+                        <a href="${resource.url}" target="_blank" class="visit-btn">Visit Resource <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                `;
+                
+                resourcesContainer.appendChild(resourceCard);
+            });
+        }
+        
+        // Filter resources by category
+        function filterResources(category) {
+            let filteredResources = resources;
+            
+            if (category !== 'all') {
+                filteredResources = resources.filter(resource => resource.category === category);
+            }
+            
+            // Apply search filter if there's a search term
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            if (searchTerm) {
+                filteredResources = filteredResources.filter(resource => 
+                    resource.title.toLowerCase().includes(searchTerm) ||
+                    resource.description.toLowerCase().includes(searchTerm) ||
+                    resource.type.toLowerCase().includes(searchTerm) ||
+                    resource.category.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            displayResources(filteredResources);
+        }
+        
+        // Set active category button
+        function setActiveCategory(activeCategory) {
+            categoryButtons.forEach(button => {
+                if (button.dataset.category === activeCategory) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+        
+        // Event listeners for category buttons
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.dataset.category;
+                setActiveCategory(category);
+                filterResources(category);
+            });
+        });
+        
+        // Event listener for search input
+        searchInput.addEventListener('input', () => {
+            const activeCategory = document.querySelector('.category-btn.active').dataset.category;
+            filterResources(activeCategory);
+        });
+        
+        // Initialize with all resources
+        displayResources(resources);
+        
+        // Add a simple animation to cards on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.resource-card').forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
