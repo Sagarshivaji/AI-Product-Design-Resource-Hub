@@ -131,25 +131,10 @@
             margin-bottom: 15px;
         }
         
-        .dashboard-cat {
-            background-color: #e0f7fa;
-            color: #006064;
-        }
-        
-        .pipeline-cat {
-            background-color: #f3e5f5;
-            color: #4a148c;
-        }
-        
-        .product-cat {
-            background-color: #e8f5e9;
-            color: #1b5e20;
-        }
-        
-        .research-cat {
-            background-color: #fff3e0;
-            color: #e65100;
-        }
+        .dashboard-cat { background-color: #e0f7fa; color: #006064; }
+        .pipeline-cat { background-color: #f3e5f5; color: #4a148c; }
+        .product-cat { background-color: #e8f5e9; color: #1b5e20; }
+        .research-cat { background-color: #fff3e0; color: #e65100; }
         
         .resource-card h3 {
             font-size: 1.4rem;
@@ -233,22 +218,8 @@
         }
         
         @media (max-width: 768px) {
-            .resources-container {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .categories {
-                gap: 10px;
-            }
-            
-            .category-btn {
-                padding: 10px 18px;
-                font-size: 0.9rem;
-            }
+            .resources-container { grid-template-columns: 1fr; }
+            h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -256,7 +227,7 @@
     <div class="container">
         <header>
             <h1>AI Product Design Resources Hub</h1>
-            <p class="subtitle">A curated collection of AI product design resources covering dashboards, job pipelines, AI products, and research materials for designers and developers.</p>
+            <p class="subtitle">A curated collection of real-world AI product design resources, industry guidelines, and research papers.</p>
             
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search for resources by keyword, category, or type...">
@@ -284,8 +255,7 @@
         </div>
         
         <div class="resources-container" id="resourcesContainer">
-            <!-- Resources will be dynamically added here -->
-        </div>
+            </div>
         
         <div class="no-results" id="noResults">
             <i class="fas fa-search"></i>
@@ -295,287 +265,151 @@
     </div>
     
     <footer>
-        <p>AI Product Design Resources Hub | Curated for designers and developers</p>
-        <p>Resources are regularly updated | Last updated: June 2023</p>
+        <p>AI Product Design Resources Hub | Updated with active industry links</p>
+        <p>Last verified: October 2023</p>
     </footer>
 
     <script>
-        // AI Product Design Resources Data
         const resources = [
             {
                 id: 1,
-                title: "AI Dashboard Design Patterns",
-                description: "A comprehensive collection of dashboard UI patterns specifically for AI/ML products with examples and best practices.",
-                category: "dashboard",
-                type: "Design Patterns",
-                url: "https://www.aidashboarddesign.com/patterns",
+                title: "Google People + AI Guidebook",
+                description: "A comprehensive set of methods and best practices for designing user-centered AI products, covering data collection and mental models.",
+                category: "product",
+                type: "Guidelines",
+                url: "https://pair.withgoogle.com/guidebook/",
                 featured: true
             },
             {
                 id: 2,
-                title: "AI Job Pipeline Visualization Toolkit",
-                description: "Open-source toolkit for visualizing AI training pipelines and job workflows with interactive components.",
-                category: "pipeline",
+                title: "Weights & Biases (W&B) Dashboard",
+                description: "The industry standard for visualizing ML experiments, pipeline performance, and model versioning in real-time.",
+                category: "dashboard",
                 type: "Toolkit",
-                url: "https://github.com/aidesign/pipeline-visualization",
+                url: "https://wandb.ai/site",
                 featured: true
             },
             {
                 id: 3,
-                title: "AI Product Design Guidelines",
-                description: "Google's comprehensive guide to designing AI-powered products with ethical considerations and UX patterns.",
+                title: "Microsoft Guidelines for Human-AI Interaction",
+                description: "18 prescriptive design guidelines for human-AI interaction, based on over 20 years of research and user studies.",
                 category: "product",
                 type: "Guidelines",
-                url: "https://designguidelines.ai",
+                url: "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
                 featured: true
             },
             {
                 id: 4,
-                title: "Human-Centered AI Research Papers",
-                description: "Curated collection of research papers on human-centered AI design from top conferences and journals.",
+                title: "Stanford Human-Centered AI (HAI)",
+                description: "Top-tier research papers and articles focusing on how AI should be designed to augment human intelligence rather than replace it.",
                 category: "research",
                 type: "Research Papers",
-                url: "https://hcai-research.design/papers",
+                url: "https://hai.stanford.edu/research",
                 featured: false
             },
             {
                 id: 5,
-                title: "AI Model Performance Dashboards",
-                description: "Templates and examples for dashboards that visualize AI model performance metrics and comparisons.",
-                category: "dashboard",
+                title: "MLflow Model Tracking",
+                description: "An open-source platform to manage the ML lifecycle, including experimentation, reproducibility, and deployment dashboards.",
+                category: "pipeline",
                 type: "Templates",
-                url: "https://www.modeldashboards.io/templates",
+                url: "https://mlflow.org/",
                 featured: false
             },
             {
                 id: 6,
-                title: "ML Pipeline Monitoring Systems",
-                description: "Analysis of monitoring systems for machine learning pipelines in production environments.",
+                title: "Arize AI: ML Observability",
+                description: "A platform for monitoring AI pipelines in production, specializing in model drift, data quality, and performance degradation.",
                 category: "pipeline",
                 type: "Case Studies",
-                url: "https://mlops.design/case-studies",
+                url: "https://arize.com/",
                 featured: true
             },
             {
                 id: 7,
-                title: "Conversational AI Design Patterns",
-                description: "Design patterns and principles for creating effective conversational AI interfaces and chatbots.",
+                title: "Apple Human Interface Guidelines: Machine Learning",
+                description: "Apple's official design patterns for integrating ML features into iOS and macOS apps, focusing on privacy and UX.",
                 category: "product",
                 type: "Design Patterns",
-                url: "https://conversationalai.design/patterns",
+                url: "https://developer.apple.com/design/human-interface-guidelines/machine-learning",
                 featured: false
             },
             {
                 id: 8,
-                title: "AI Ethics & Fairness Research",
-                description: "Research hub focusing on ethical AI design, bias detection, and fairness in machine learning systems.",
+                title: "IBM AI Ethics & Fairness (AI 360)",
+                description: "An open-source toolkit and research hub for detecting and mitigating bias in machine learning models.",
                 category: "research",
                 type: "Research Hub",
-                url: "https://aiethicsresearch.design",
+                url: "https://aif360.res.ibm.com/",
                 featured: true
             },
             {
                 id: 9,
-                title: "Real-time AI Data Dashboards",
-                description: "Examples of real-time dashboards for monitoring AI systems and data streams with live visualizations.",
+                title: "Streamlit AI Gallery",
+                description: "A collection of interactive data apps and dashboards built specifically for machine learning projects using Python.",
                 category: "dashboard",
                 type: "Examples",
-                url: "https://realtime-ai-dash.design/examples",
+                url: "https://streamlit.io/gallery",
                 featured: false
             },
             {
                 id: 10,
-                title: "Automated ML Pipeline Design",
-                description: "Guide to designing automated machine learning pipelines with focus on user experience and control.",
+                title: "Hugging Face Pipelines",
+                description: "Documentation and guides for building and automating ML pipelines for Natural Language Processing and Computer Vision.",
                 category: "pipeline",
                 type: "Guide",
-                url: "https://automl.design/guide",
+                url: "https://huggingface.co/docs/transformers/main_classes/pipelines",
                 featured: false
             },
             {
                 id: 11,
-                title: "AI-Powered Design Tools",
-                description: "Review of AI-powered design tools that assist with prototyping, layout generation, and UX analysis.",
+                title: "Framer AI Design Tool",
+                description: "A modern design tool that uses AI to generate layouts, prototypes, and copy from simple text prompts.",
                 category: "product",
                 type: "Tool Review",
-                url: "https://aitools.design/review",
+                url: "https://www.framer.com/ai/",
                 featured: true
             },
             {
                 id: 12,
-                title: "AI Design Thinking Methodology",
-                description: "Research on adapting design thinking methodologies for AI product development cycles.",
+                title: "IDEO: AI + Design Thinking",
+                description: "Resources from the world's leading design firm on how to apply design thinking to AI-driven user experiences.",
                 category: "research",
                 type: "Methodology",
-                url: "https://designthinking.ai/methodology",
+                url: "https://www.ideo.com/journal/how-to-design-ai-for-people",
                 featured: false
             },
             {
                 id: 13,
-                title: "Multi-model AI Dashboards",
-                description: "Framework for designing dashboards that compare and contrast multiple AI models simultaneously.",
+                title: "LMSYS Chatbot Arena",
+                description: "A crowdsourced open platform for evaluating and comparing large language models (LLMs) via a leaderboard dashboard.",
                 category: "dashboard",
                 type: "Framework",
-                url: "https://multimodel-dash.design/framework",
+                url: "https://chat.lmsys.org/?leaderboard",
                 featured: false
             },
             {
                 id: 14,
-                title: "CI/CD for ML Pipelines",
-                description: "Best practices for implementing continuous integration and deployment for machine learning pipelines.",
+                title: "Continuous Machine Learning (CML)",
+                description: "Open-source library for implementing CI/CD in machine learning projects using GitHub Actions and GitLab CI.",
                 category: "pipeline",
                 type: "Best Practices",
-                url: "https://cicd-ml.design/best-practices",
+                url: "https://cml.dev/",
                 featured: true
             },
             {
                 id: 15,
                 title: "AI Product Management Resources",
-                description: "Resources for product managers working on AI products, including roadmaps and stakeholder management.",
+                description: "A collection of resources for PMs to understand the technical and UX trade-offs of building AI products.",
                 category: "product",
                 type: "PM Resources",
-                url: "https://aiproductmanagement.design/resources",
+                url: "https://learning.oreilly.com/library/view/ai-product-management/9781492053424/",
                 featured: false
             },
             {
                 id: 16,
-                title: "AI Explainability Research",
-                description: "Latest research on making AI decisions explainable and interpretable for end-users and stakeholders.",
+                title: "SHAP (Explainable AI) Research",
+                description: "A game-theoretic approach to explain the output of any machine learning model, critical for transparency in AI design.",
                 category: "research",
                 type: "Research Portal",
-                url: "https://explainable-ai.design/research",
-                featured: true
-            }
-        ];
-
-        // DOM elements
-        const resourcesContainer = document.getElementById('resourcesContainer');
-        const categoryButtons = document.querySelectorAll('.category-btn');
-        const searchInput = document.getElementById('searchInput');
-        const noResults = document.getElementById('noResults');
-        const totalCount = document.getElementById('totalCount');
-        const filteredCount = document.getElementById('filteredCount');
-        
-        // Initialize counts
-        totalCount.textContent = resources.length;
-        
-        // Display all resources on page load
-        function displayResources(resourceArray) {
-            resourcesContainer.innerHTML = '';
-            
-            if (resourceArray.length === 0) {
-                noResults.style.display = 'block';
-                filteredCount.textContent = '0';
-                return;
-            }
-            
-            noResults.style.display = 'none';
-            filteredCount.textContent = resourceArray.length;
-            
-            resourceArray.forEach(resource => {
-                const resourceCard = document.createElement('div');
-                resourceCard.className = 'resource-card';
-                
-                // Determine category class
-                let categoryClass = '';
-                switch(resource.category) {
-                    case 'dashboard': categoryClass = 'dashboard-cat'; break;
-                    case 'pipeline': categoryClass = 'pipeline-cat'; break;
-                    case 'product': categoryClass = 'product-cat'; break;
-                    case 'research': categoryClass = 'research-cat'; break;
-                }
-                
-                // Determine category label
-                let categoryLabel = '';
-                switch(resource.category) {
-                    case 'dashboard': categoryLabel = 'Dashboard'; break;
-                    case 'pipeline': categoryLabel = 'Job Pipeline'; break;
-                    case 'product': categoryLabel = 'AI Product'; break;
-                    case 'research': categoryLabel = 'Research'; break;
-                }
-                
-                resourceCard.innerHTML = `
-                    <div class="card-header">
-                        <span class="resource-category ${categoryClass}">${categoryLabel}</span>
-                        <h3>${resource.title}</h3>
-                        <p>${resource.description}</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="resource-type">${resource.type}</span>
-                        <a href="${resource.url}" target="_blank" class="visit-btn">Visit Resource <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                `;
-                
-                resourcesContainer.appendChild(resourceCard);
-            });
-        }
-        
-        // Filter resources by category
-        function filterResources(category) {
-            let filteredResources = resources;
-            
-            if (category !== 'all') {
-                filteredResources = resources.filter(resource => resource.category === category);
-            }
-            
-            // Apply search filter if there's a search term
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            if (searchTerm) {
-                filteredResources = filteredResources.filter(resource => 
-                    resource.title.toLowerCase().includes(searchTerm) ||
-                    resource.description.toLowerCase().includes(searchTerm) ||
-                    resource.type.toLowerCase().includes(searchTerm) ||
-                    resource.category.toLowerCase().includes(searchTerm)
-                );
-            }
-            
-            displayResources(filteredResources);
-        }
-        
-        // Set active category button
-        function setActiveCategory(activeCategory) {
-            categoryButtons.forEach(button => {
-                if (button.dataset.category === activeCategory) {
-                    button.classList.add('active');
-                } else {
-                    button.classList.remove('active');
-                }
-            });
-        }
-        
-        // Event listeners for category buttons
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const category = button.dataset.category;
-                setActiveCategory(category);
-                filterResources(category);
-            });
-        });
-        
-        // Event listener for search input
-        searchInput.addEventListener('input', () => {
-            const activeCategory = document.querySelector('.category-btn.active').dataset.category;
-            filterResources(activeCategory);
-        });
-        
-        // Initialize with all resources
-        displayResources(resources);
-        
-        // Add a simple animation to cards on load
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.querySelectorAll('.resource-card').forEach((card, index) => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    
-                    setTimeout(() => {
-                        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 100);
-                });
-            }, 300);
-        });
-    </script>
-</body>
-</html>
+                url: "
