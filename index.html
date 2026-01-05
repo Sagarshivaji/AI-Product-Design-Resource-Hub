@@ -135,6 +135,10 @@
         .pipeline-cat { background-color: #f3e5f5; color: #4a148c; }
         .product-cat { background-color: #e8f5e9; color: #1b5e20; }
         .research-cat { background-color: #fff3e0; color: #e65100; }
+        .design-cat { background-color: #fce4ec; color: #880e4f; }
+        .ui-cat { background-color: #e3f2fd; color: #0d47a1; }
+        .crm-cat { background-color: #e8f5e9; color: #1b5e20; }
+        .sales-cat { background-color: #fff8e1; color: #ff6f00; }
         
         .resource-card h3 {
             font-size: 1.4rem;
@@ -220,6 +224,8 @@
         @media (max-width: 768px) {
             .resources-container { grid-template-columns: 1fr; }
             h1 { font-size: 2.2rem; }
+            .categories { flex-direction: column; align-items: center; }
+            .category-btn { width: 80%; text-align: center; }
         }
     </style>
 </head>
@@ -241,15 +247,19 @@
             <button class="category-btn" data-category="pipeline">Job Pipelines</button>
             <button class="category-btn" data-category="product">AI Products</button>
             <button class="category-btn" data-category="research">Research</button>
+            <button class="category-btn" data-category="design">Design Inspiration</button>
+            <button class="category-btn" data-category="ui">UI/UX Reference</button>
+            <button class="category-btn" data-category="crm">CRM Tools</button>
+            <button class="category-btn" data-category="sales">Sales Platforms</button>
         </div>
         
         <div class="counter">
             <div class="counter-item">
-                <div class="counter-number" id="totalCount">16</div>
+                <div class="counter-number" id="totalCount">26</div>
                 <div>Total Resources</div>
             </div>
             <div class="counter-item">
-                <div class="counter-number" id="filteredCount">16</div>
+                <div class="counter-number" id="filteredCount">26</div>
                 <div>Currently Showing</div>
             </div>
         </div>
@@ -267,7 +277,7 @@
     
     <footer>
         <p>AI Product Design Resources Hub | Updated with active industry links</p>
-        <p>Last verified: October 2023</p>
+        <p>Last verified: January 2026</p>
     </footer>
 
     <script>
@@ -415,6 +425,96 @@
                 type: "Research Portal",
                 url: "https://shap.readthedocs.io/en/latest/",
                 featured: true
+            },
+            {
+                id: 17,
+                title: "Mobbin - UI Design Inspiration",
+                description: "A massive collection of mobile app screenshots from popular apps, perfect for UI/UX design inspiration and pattern research.",
+                category: "design",
+                type: "Design Library",
+                url: "https://mobbin.com/",
+                featured: true
+            },
+            {
+                id: 18,
+                title: "Design Spells - UI/UX Resources",
+                description: "Curated design resources, tools, and inspiration for UI/UX designers working on digital products.",
+                category: "ui",
+                type: "Resource Hub",
+                url: "https://www.designspells.com/",
+                featured: false
+            },
+            {
+                id: 19,
+                title: "Landing Love - Landing Page Inspiration",
+                description: "A curated gallery of beautiful landing page designs from real companies, great for conversion-focused design research.",
+                category: "design",
+                type: "Inspiration Gallery",
+                url: "https://www.landing.love/",
+                featured: false
+            },
+            {
+                id: 20,
+                title: "Refero - Design References",
+                description: "A collection of design references from real products, organized by patterns and components for practical design research.",
+                category: "ui",
+                type: "Reference Library",
+                url: "https://refero.design/",
+                featured: false
+            },
+            {
+                id: 21,
+                title: "Minimal Gallery - Clean UI Inspiration",
+                description: "A showcase of minimal, clean, and functional UI designs for modern digital products and applications.",
+                category: "design",
+                type: "Design Showcase",
+                url: "https://minimal.gallery/",
+                featured: false
+            },
+            {
+                id: 22,
+                title: "SurveyCircle - Research Platform",
+                description: "A platform for creating and distributing surveys, valuable for user research and gathering feedback on AI products.",
+                category: "research",
+                type: "Research Tool",
+                url: "https://www.surveycircle.com/en/",
+                featured: false
+            },
+            {
+                id: 23,
+                title: "HubSpot - CRM & Marketing Platform",
+                description: "A comprehensive CRM platform with marketing, sales, and service hubs, useful for understanding customer journey design.",
+                category: "crm",
+                type: "Business Platform",
+                url: "https://www.hubspot.com/",
+                featured: true
+            },
+            {
+                id: 24,
+                title: "Zoho CRM - Customer Relationship Management",
+                description: "A robust CRM solution with AI-powered insights, sales automation, and analytics for data-driven product decisions.",
+                category: "crm",
+                type: "Business Tool",
+                url: "https://www.zoho.com/en-in/crm/",
+                featured: false
+            },
+            {
+                id: 25,
+                title: "Clary - AI Design Assistant",
+                description: "An AI-powered design assistant that helps with UX research, prototyping, and design system management.",
+                category: "product",
+                type: "AI Tool",
+                url: "https://www.clary.com/",
+                featured: true
+            },
+            {
+                id: 26,
+                title: "Clari - Revenue Operations Platform",
+                description: "An AI-powered revenue platform that provides pipeline visibility and forecasting for sales and business operations.",
+                category: "sales",
+                type: "Sales Platform",
+                url: "https://www.clari.com/?home_solutions=pipeline",
+                featured: true
             }
         ];
 
@@ -461,6 +561,10 @@
                     case 'pipeline': categoryClass = 'pipeline-cat'; break;
                     case 'product': categoryClass = 'product-cat'; break;
                     case 'research': categoryClass = 'research-cat'; break;
+                    case 'design': categoryClass = 'design-cat'; break;
+                    case 'ui': categoryClass = 'ui-cat'; break;
+                    case 'crm': categoryClass = 'crm-cat'; break;
+                    case 'sales': categoryClass = 'sales-cat'; break;
                 }
                 
                 card.innerHTML = `
@@ -488,6 +592,10 @@
                 case 'pipeline': return 'Job Pipelines';
                 case 'product': return 'AI Products';
                 case 'research': return 'Research';
+                case 'design': return 'Design Inspiration';
+                case 'ui': return 'UI/UX Reference';
+                case 'crm': return 'CRM Tools';
+                case 'sales': return 'Sales Platforms';
                 default: return category;
             }
         }
